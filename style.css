@@ -1,0 +1,519 @@
+/* ==========================================================================
+   THE WALKMAN AD DESIGN SYSTEM: 80% VINTAGE PRINT AD + 20% HARDWARE GRIT
+   ========================================================================== */
+:root {
+    --bg-deep: #0a0c10;
+    --bg-card: #131722;
+    --neon-blue: #00f0ff;
+    --neon-pink: #ff007f;
+    --neon-yellow: #ffee00;
+    --silver-metallic: #cbd5e1;
+    --gold: #e2b842;
+    --grey-text: #94a3b8;
+
+    /* The Iconic Walkman Print Ad Rainbow Trail */
+    --rainbow-trail:
+        3px 3px 0px var(--neon-pink),
+        6px 6px 0px #ff9900,
+        9px 9px 0px var(--neon-yellow),
+        12px 12px 0px #33ff00,
+        15px 15px 0px var(--neon-blue);
+
+    --font-mono: 'Share Tech Mono', 'Courier New', Courier, monospace;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--bg-deep);
+    color: var(--silver-metallic);
+    font-family: var(--font-mono);
+    min-height: 100vh;
+    overflow-x: hidden;
+    position: relative;
+    padding-bottom: 80px;
+}
+
+/* ==========================================================================
+   PERMANENT CRT SCREEN SCANLINE EFFECT
+   ========================================================================== */
+body::before {
+    content: " ";
+    display: block;
+    position: fixed;
+    top: 0;
+    left: 0;
+    bottom: 0;
+    right: 0;
+    background: linear-gradient(rgba(18, 16, 16, 0) 50%, rgba(0, 0, 0, 0.3) 50%),
+        linear-gradient(90deg, rgba(255, 0, 0, 0.04), rgba(0, 255, 0, 0.02), rgba(0, 0, 255, 0.04));
+    z-index: 10000;
+    background-size: 100% 4px, 6px 100%;
+    pointer-events: none;
+}
+
+/* ==========================================================================
+   PURE CSS 3D BACKGROUND PRODUCTS (CASSETTE, MONITOR, GEAR)
+   ========================================================================== */
+.bg-3d-matrix {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    pointer-events: none;
+    perspective: 1000px;
+    overflow: hidden;
+    opacity: 0.45;
+}
+
+/* 3D Scene Node */
+.product-3d-scene {
+    position: absolute;
+    transform-style: preserve-3d;
+}
+
+/* Object 1: The Vintage Cassette Tape (Floating Top Left) */
+.scene-cassette {
+    top: 15%;
+    left: 10%;
+    animation: rotateCassette 12s infinite linear, driftObject 20s infinite alternate ease-in-out;
+}
+
+.cassette-box {
+    width: 120px;
+    height: 80px;
+    border: 2px solid var(--neon-blue);
+    background: rgba(0, 240, 255, 0.05);
+    position: relative;
+    transform-style: preserve-3d;
+}
+
+.cassette-box::before {
+    content: '';
+    position: absolute;
+    top: 25px;
+    left: 20px;
+    width: 80px;
+    height: 30px;
+    border: 1px dashed var(--neon-pink);
+}
+
+/* Object 2: The Retro CRT Chassis (Floating Mid Right) */
+.scene-monitor {
+    top: 45%;
+    right: 8%;
+    animation: rotateMonitor 18s infinite linear, driftObject2 25s infinite alternate ease-in-out;
+}
+
+.monitor-cube {
+    width: 100px;
+    height: 100px;
+    border: 2px solid var(--silver-metallic);
+    background: rgba(203, 213, 225, 0.05);
+    transform-style: preserve-3d;
+}
+
+/* Object 3: Mechanical Robotic Ring Gear (Floating Bottom Left) */
+.scene-gear {
+    bottom: 15%;
+    left: 15%;
+    animation: rotateGear 10s infinite linear;
+}
+
+.gear-ring {
+    width: 90px;
+    height: 90px;
+    border: 4px dotted var(--neon-yellow);
+    border-radius: 50%;
+    transform-style: preserve-3d;
+}
+
+/* 3D Transformations & Drifting Paths */
+@keyframes rotateCassette {
+    0% {
+        transform: rotateX(0deg) rotateY(0deg);
+    }
+
+    100% {
+        transform: rotateX(360deg) rotateY(360deg);
+    }
+}
+
+@keyframes rotateMonitor {
+    0% {
+        transform: rotateX(45deg) rotateY(0deg);
+    }
+
+    100% {
+        transform: rotateX(45deg) rotateY(-360deg);
+    }
+}
+
+@keyframes rotateGear {
+    0% {
+        transform: rotateZ(0deg) rotateX(60deg);
+    }
+
+    100% {
+        transform: rotateZ(360deg) rotateX(60deg);
+    }
+}
+
+@keyframes driftObject {
+    0% {
+        transform: translateY(0px) translateX(0px);
+    }
+
+    100% {
+        transform: translateY(30px) translateX(15px);
+    }
+}
+
+@keyframes driftObject2 {
+    0% {
+        transform: translateY(0px) scale(0.9);
+    }
+
+    100% {
+        transform: translateY(-40px) scale(1.1);
+    }
+}
+
+/* ==========================================================================
+   NAVIGATION & GLOBAL WALKMAN PRINT TYPE LAYOUT
+   ========================================================================== */
+header {
+    width: 100%;
+    background-color: rgba(10, 12, 16, 0.9);
+    border-bottom: 3px double var(--neon-blue);
+    padding: 20px 5%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+}
+
+.logo-glitch {
+    font-size: 2rem;
+    font-weight: 900;
+    color: #fff;
+    text-transform: uppercase;
+    letter-spacing: 3px;
+    text-shadow: 2px 2px 0px var(--neon-pink);
+    cursor: pointer;
+    transition: text-shadow 0.2s;
+}
+
+.logo-glitch:hover {
+    text-shadow: var(--rainbow-trail);
+}
+
+nav {
+    display: flex;
+    gap: 10px;
+}
+
+.nav-link {
+    color: var(--silver-metallic);
+    text-decoration: none;
+    font-weight: bold;
+    font-size: 0.9rem;
+    padding: 8px 16px;
+    border: 1px solid transparent;
+    text-transform: uppercase;
+    transition: all 0.2s ease-in-out;
+}
+
+.nav-link:hover,
+.nav-link.active {
+    color: #000 !important;
+    background-color: var(--neon-blue);
+    box-shadow: var(--rainbow-trail);
+    transform: translate(-4px, -4px);
+}
+
+.nav-btn {
+    border: 1px solid var(--gold);
+    color: var(--gold);
+}
+
+.nav-btn:hover,
+.nav-btn.active {
+    background-color: var(--gold);
+    box-shadow: 3px 3px 0px var(--neon-pink);
+}
+
+/* ==========================================================================
+   MAIN DASHBOARD & PORTAL STRUCTURE
+   ========================================================================== */
+.section-container {
+    position: relative;
+    z-index: 10;
+    padding: 80px 5% 40px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.hero-grid {
+    display: grid;
+    grid-template-columns: 1.2fr 0.8fr;
+    gap: 40px;
+    align-items: center;
+}
+
+h1 {
+    font-size: 4rem;
+    font-weight: 900;
+    color: #fff;
+    line-height: 0.95;
+    letter-spacing: -1px;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+    text-shadow: 3px 3px 0px var(--neon-pink);
+}
+
+.hero-tagline {
+    color: #fff;
+    font-size: 1.2rem;
+    background: rgba(19, 23, 34, 0.85);
+    border-left: 5px solid var(--neon-yellow);
+    padding: 15px;
+    margin-bottom: 35px;
+}
+
+.hero-buttons {
+    display: flex;
+    gap: 20px;
+}
+
+.btn {
+    padding: 15px 30px;
+    text-decoration: none;
+    font-weight: 900;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.primary-neon {
+    background-color: var(--neon-blue);
+    color: #000;
+    box-shadow: 4px 4px 0px #fff;
+}
+
+.primary-neon:hover {
+    transform: translate(-4px, -4px);
+    box-shadow: var(--rainbow-trail);
+}
+
+.secondary-silver {
+    border: 2px solid #fff;
+    color: #fff;
+}
+
+.secondary-silver:hover {
+    background-color: #fff;
+    color: #000;
+    transform: translate(-4px, -4px);
+    box-shadow: 4px 4px 0px var(--neon-pink);
+}
+
+/* Visual Ad Frame Showcase */
+.walkman-ad-frame {
+    border: 3px solid #fff;
+    background: linear-gradient(135deg, #1b2336 0%, #080a0f 100%);
+    padding: 20px;
+    box-shadow: var(--rainbow-trail);
+    position: relative;
+    height: 350px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.ad-accent-circle {
+    position: absolute;
+    width: 200px;
+    height: 200px;
+    border: 2px dashed var(--neon-pink);
+    border-radius: 50%;
+    animation: rotateGear 20s infinite linear;
+}
+
+/* Interactive Action Cards Grid */
+.portal-grid {
+    position: relative;
+    z-index: 10;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+    gap: 40px;
+    padding: 40px 5% 100px;
+    max-width: 1300px;
+    margin: 0 auto;
+}
+
+.panel-style {
+    background-color: var(--bg-card);
+    border: 2px solid #fff;
+    padding: 35px;
+    transition: transform 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.275), box-shadow 0.25s;
+}
+
+/* Hovering Expansion Logic directly derived from Walkman graphics */
+.panel-style:hover {
+    transform: translate(-8px, -8px);
+    box-shadow: var(--rainbow-trail);
+    border-color: var(--neon-blue);
+}
+
+.card-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 2px solid var(--neon-yellow);
+    padding-bottom: 10px;
+    margin-bottom: 20px;
+}
+
+.panel-style h2 {
+    font-size: 1.6rem;
+    font-weight: 900;
+    color: #fff;
+}
+
+.card-num {
+    background: var(--neon-pink);
+    color: #fff;
+    padding: 2px 8px;
+    font-size: 0.8rem;
+    font-weight: bold;
+}
+
+.portal-btn {
+    display: block;
+    width: 100%;
+    text-align: center;
+    background: transparent;
+    border: 2px solid #fff;
+    color: #fff;
+    padding: 12px;
+    font-weight: bold;
+    text-decoration: none;
+    text-transform: uppercase;
+    transition: all 0.2s;
+}
+
+.portal-btn:hover {
+    background: var(--neon-yellow);
+    color: #000;
+    border-color: var(--neon-yellow);
+}
+
+/* ==========================================================================
+   MULTI-PAGE HUB LAYOUT VARIATIONS
+   ========================================================================== */
+.content-hub {
+    position: relative;
+    z-index: 10;
+    max-width: 1100px;
+    margin: 0 auto;
+    padding: 60px 5%;
+}
+
+.hub-header {
+    border-bottom: 4px solid #fff;
+    padding-bottom: 15px;
+    margin-bottom: 50px;
+}
+
+.hub-header h1 {
+    font-size: 4.5rem;
+    text-shadow: var(--rainbow-trail);
+}
+
+/* ==========================================================================
+   CONTACT TERMINAL & SPECIFIC WRAPPERS
+   ========================================================================== */
+.contact-terminal-container {
+    position: relative;
+    z-index: 10;
+    padding: 60px 5%;
+    display: flex;
+    justify-content: center;
+}
+
+.directory-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background: #090c12;
+    border: 1px solid var(--grey-text);
+    padding: 20px;
+    margin-bottom: 15px;
+    transition: all 0.2s;
+}
+
+.directory-row:hover {
+    transform: scale(1.02);
+    border-color: var(--neon-blue);
+    box-shadow: 4px 4px 0px var(--neon-pink);
+}
+
+.dir-address {
+    color: var(--neon-blue);
+    font-weight: bold;
+    text-decoration: none;
+}
+
+/* ==========================================================================
+   STARK FIXED STRUCTURAL FOOTER
+   ========================================================================== */
+footer {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    background-color: #000;
+    border-top: 2px solid var(--neon-blue);
+    padding: 15px 5%;
+    z-index: 999;
+}
+
+.footer-grid {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    font-size: 0.85rem;
+    font-weight: bold;
+    color: var(--grey-text);
+}
+
+/* ==========================================================================
+   RESPONSIVITY MEDIA CONTROLS
+   ========================================================================== */
+@media (max-width: 950px) {
+    h1 {
+        font-size: 2.8rem;
+    }
+
+    .hero-grid {
+        grid-template-columns: 1fr;
+    }
+
+    .walkman-ad-frame {
+        display: none;
+    }
+
+    header {
+        flex-direction: column;
+        gap: 15px;
+    }
+}
