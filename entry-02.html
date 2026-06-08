@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Blu.t.r.l.s // Log_02: Interrupt Routines</title>
+    <link rel="stylesheet" href="style.css">
+    <style>
+        /* Article specific helper metrics */
+        .article-meta-panel {
+            border-bottom: 2px dashed rgba(255, 255, 255, 0.2);
+            padding-bottom: 15px;
+            margin-bottom: 30px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 10px;
+        }
+
+        .back-link {
+            display: inline-block;
+            margin-top: 30px;
+            color: var(--neon-blue, #00f0ff);
+            text-decoration: none;
+            font-weight: bold;
+            transition: color 0.2s;
+        }
+
+        .back-link:hover {
+            color: var(--neon-pink, #ff007f);
+        }
+
+        .log-content p {
+            line-height: 1.7;
+            margin-bottom: 20px;
+            font-size: 1.05rem;
+        }
+
+        .code-block-inset {
+            background: #070a0f;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 15px;
+            font-family: monospace;
+            color: #52ff83;
+            margin: 25px 0;
+            overflow-x: auto;
+        }
+    </style>
+</head>
+
+<body class="gritty-bg">
+    <header>
+        <div class="logo-glitch" data-text="Blu.t.r.l.s">Blu.t.r.l.s</div>
+        <nav>
+            <a href="index.html" class="nav-link">// HOME</a>
+            <a href="robotics.html" class="nav-link">// ROBOTICS</a>
+            <a href="music.html" class="nav-link">// MUSIC</a>
+            <a href="printing.html" class="nav-link">// 3D PRINTING</a>
+            <a href="blog.html" class="nav-link active">// LOG_BOOK</a>
+            <a href="contact.html" class="nav-link nav-btn">// CONNECT</a>
+        </nav>
+    </header>
+
+    <main class="content-hub">
+        <div class="rainbow-gradient-bar"></div>
+
+        <article class="panel-style">
+            <div class="article-meta-panel">
+                <div>
+                    <span style="color: var(--neon-pink, #ff007f); font-weight: bold;">LOG_ENTRY_02 //</span>
+                    <span style="color: #94a3b8; margin-left: 10px;">2026.05.14</span>
+                </div>
+                <div class="post-tags" style="margin: 0;">
+                    <span>[Robotics]</span><span>[Arduino]</span><span>[Firmware]</span>
+                </div>
+            </div>
+
+            <h1 style="font-size: 2.5rem; color: #fff; margin-bottom: 25px; line-height: 1.2;">
+                Understanding Hardware Interrupts in Microcontrollers
+            </h1>
+
+            <div class="log-content">
+                <p>
+                    When dealing with embedded hardware platforms like an ATMega328p or ESP32, structural delays are
+                    code traps. Using blocking mechanisms like <code>delay()</code> leaves the processor unable to
+                    observe incoming inputs, creating structural communication dead-ends.
+                </p>
+
+                <p>
+                    Hardware interrupts switch execution focus immediately by monitoring physical hardware state changes
+                    directly at the register scale. When an external pin goes high, the core stops ongoing processing
+                    queues, executes an isolated routine, and returns to operations within fractions of a microsecond.
+                </p>
+
+                <div class="code-block-inset">
+                    // Typical hardware button handler configuration example
+                    void setup() {
+                    pinMode(2, INPUT_PULLUP);
+                    // Attach ISR to monitor falling voltage edges on digital pin 2
+                    attachInterrupt(digitalPinToInterrupt(2), emergencyStopISR, FALLING);
+                    }
+
+                    void emergencyStopISR() {
+                    // Keep this function lean—avoid serial prints or loops here
+                    systemSafeState = true;
+                    }
+                </div>
+
+                <p>
+                    Designing stable Interrupt Service Routines (ISRs) requires prioritizing execution speed. Attempting
+                    to manage heavy mathematical operations, complex nested tracking loops, or debug logs inside an
+                    active service loop blocks critical hardware background layers, leading to runtime system crashes.
+                </p>
+
+                <p>
+                    Keep execution fast: modify a <code>volatile</code> state boolean within the handler node, and allow
+                    your main running thread to evaluate and process structural mechanical actions safely during its
+                    next loop cycle.
+                </p>
+            </div>
+
+            <a href="blog.html" class="back-link">&lt;&lt; RETURN_TO_TIMELINE_LEDGER</a>
+        </article>
+    </main>
+
+    <footer>
+        <div class="footer-grid">
+            <p>© 2026 BLU.T.R.L.S. TRANSMITTING INDEPENDENT CULTURE.</p>
+            <p>SYS_VER_4.2.0_Y2K</p>
+        </div>
+    </footer>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

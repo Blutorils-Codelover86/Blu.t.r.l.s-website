@@ -42,10 +42,31 @@
                 <div class="card-header">
                     <h2>Arduino Core Strategy</h2>
                 </div>
-                <p>Mastering pulse width modulation (PWM), reading analog sensor configurations, and structuring
-                    reliable execution code pipelines.</p>
+                <p>Mastering pulse width modulation (PWM) by using Arduino Boards-</p>
                 <div class="code-terminal">
-                    <code>void setup() { pinMode(LED_BUILTIN, OUTPUT); }</code>
+                    <code>
+int ledPin = 9; // Pin connected to the LED <br>
+
+void setup() { <br>
+  pinMode(ledPin, OUTPUT); <br>
+} <br>
+
+void loop() { <br>
+  // Fade in (brightness from 0 to 255) <br>
+  for (int i = 0; i <= 255; i++) { <br>
+    analogWrite(ledPin, i); <br>
+    delay(15); <br>
+  } <br>
+  
+  // Fade out (brightness from 255 to 0) <br>
+  for (int i = 255; i >= 0; i--) { <br>
+    analogWrite(ledPin, i); <br>
+    delay(15); <br>
+  } <br>
+}
+
+</code>
+
                 </div>
             </article>
 
@@ -55,6 +76,9 @@
                 </div>
                 <p>Wireless implementation. Leveraging dual-core processing components to spin up localized control
                     engines and transmit direct automation streams.</p>
+                <div class="code-terminal">
+                    <code>...Under Progress-Stay Tuned!...</code>
+                </div>
             </article>
         </div>
     </main>
