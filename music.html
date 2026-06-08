@@ -16,7 +16,6 @@
             width: 100%;
             height: 100%;
             z-index: 1;
-            /* Sits completely behind the main content-hub layout */
             pointer-events: none;
             overflow: hidden;
         }
@@ -28,14 +27,67 @@
             width: 100%;
             height: 100%;
             opacity: 0.12;
-            /* Keeps the look subtle and clean, avoiding text legibility issues */
             z-index: 0;
         }
 
-        /* Ensure content stands out gracefully on top of the deep background assets */
         .content-hub {
             position: relative;
             z-index: 10;
+        }
+
+        /* Technical layout utility stylings */
+        .grid-2col {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(450px, 1fr));
+            gap: 25px;
+            margin-top: 25px;
+        }
+
+        @media (max-width: 600px) {
+            .grid-2col {
+                grid-template-columns: 1fr;
+            }
+        }
+
+        .signal-flow-box {
+            background: rgba(0, 0, 0, 0.5);
+            border: 1px dashed var(--neon-blue, #00f0ff);
+            padding: 20px;
+            font-family: monospace;
+            font-size: 0.9rem;
+            line-height: 1.5;
+            color: #52ff83;
+            margin: 20px 0;
+        }
+
+        .gear-spec-table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+            font-size: 0.9rem;
+        }
+
+        .gear-spec-table th,
+        .gear-spec-table td {
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            padding: 10px;
+            text-align: left;
+        }
+
+        .gear-spec-table th {
+            background: rgba(0, 240, 255, 0.1);
+            color: #fff;
+        }
+
+        .badge-alt {
+            background: #ff007f;
+            color: #fff;
+            padding: 2px 6px;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            margin-left: 10px;
+            vertical-align: middle;
         }
     </style>
 </head>
@@ -43,7 +95,6 @@
 <body class="static-bg">
     <div class="bg-3d-matrix">
         <canvas id="bg-oscilloscope" class="bg-canvas-layer"></canvas>
-
         <div class="product-3d-scene scene-cassette">
             <div class="cassette-box"></div>
         </div>
@@ -66,22 +117,134 @@
 
     <main class="content-hub">
         <div class="rainbow-gradient-bar"></div>
+
         <div class="hub-header">
             <h1>// FREQUENCY_CONTROL</h1>
-            <p class="subtitle">An exploration of voltage, frequencies, and rhythm inspired by Daft Punk and retro gear.
-            </p>
+            <p class="subtitle">An interactive technical archive breaking down voltage constraints, audio sampling
+                limitations, and rhythmic architectures from the golden era of hardware dance music.</p>
         </div>
 
-        <section class="music-tutorial">
-            <h2>The French Touch Sidechain Blueprint</h2>
-            <p>Discover how applying extreme bus-compression to your master music track alongside an aggressive, driving
-                kick drum pattern creates that classic pumping house energy.</p>
+        <section class="panel-style" style="margin-bottom: 30px;">
+            <div class="card-header">
+                <h2>The Philosophy of Sound Machine Iterations</h2>
+                <span style="color: var(--neon-blue, #00f0ff);">STATUS: ACTIVE</span>
+            </div>
+            <p>
+                Music production isn't just about combining clear frequencies; it’s an active dialogue with electronic
+                limitations. The legendary tracks cut in home studios throughout the late 1990s didn’t achieve their
+                classic weight because of pristine digital accuracy—they found it in the grit of overloading input
+                stages, the punch of low-bit samplers, and the raw energy of analog outboards pushed to their limits.
+            </p>
+            <p style="margin-top: 15px;">
+                By analyzing signals at the hardware layer, we learn to look past basic loops and start designing actual
+                technical structures. Here, we document the signal paths, hardware configurations, and modulation layers
+                required to build real groove architecture out of plain electrons.
+            </p>
         </section>
 
-        <section class="music-tutorial">
-            <h2>Demystifying Subtractive Synthesis</h2>
-            <p>A step-by-step deep dive into signal flows. Learn to successfully route an oscillator to a low-pass
-                filter, modulate that filter with an envelope generator, and give raw digital sounds analog warmth.</p>
+        <div class="grid-2col">
+            <section class="panel-style">
+                <div class="card-header">
+                    <h2>The French Touch Sidechain Blueprint</h2>
+                    <span class="badge-alt">Rhythm Mod</span>
+                </div>
+                <p>
+                    The rhythmic "pumping" effect that defines French house isn't just an artistic quirk—it’s a dynamic
+                    tool built to manage headroom. By routing an aggressive, uncompressed kick drum signal into the
+                    sidechain side-input of a vintage stereo VCA compressor (like the classic **Alesis 3630**), the
+                    entire backing track is forced to drop in volume whenever the kick drum strikes.
+                </p>
+                <div class="signal-flow-box">
+                    [TR-909 Kick Output] --------> [Mixer Channel 1] ----> [Direct Out] ---> [Compressor Sidechain
+                    Input]
+                    [ASR-10 Loop Sample] -------> [Mixer Channel 2] ----> [Main Stereo Bus Aud] ---> [Compressor VCA
+                    Audio In]
+                </div>
+                <p>
+                    When calibrated with an incredibly fast release time and a high ratio setting, the backing sample
+                    snaps back into full volume right after the kick decays. This creates a breathing acoustic pocket
+                    that prevents overlapping low-end frequencies from blowing out the master mix, while building an
+                    infectious rhythmic push-and-pull.
+                </p>
+            </section>
+
+            <section class="panel-style">
+                <div class="card-header">
+                    <h2>Demystifying Subtractive Synthesis</h2>
+                    <span class="badge-alt">Voltage Mod</span>
+                </div>
+                <p>
+                    Subtractive synthesis starts by generating raw, mathematically perfect geometric audio shapes packed
+                    with rich harmonic overtones—typically a sharp, bright **sawtooth** wave or a hollow **square**
+                    wave. From there, your main goal is to carve away unwanted frequencies using a low-pass filter
+                    module.
+                </p>
+                <p style="margin-top: 10px;">
+                    The real magic happens when you introduce modulation sources to control the filter's cutoff point
+                    over time:
+                </p>
+                <ul style="margin: 15px 0 15px 20px; line-height: 1.6; color: #94a3b8;">
+                    <li><strong style="color: #fff;">The ADSR Envelope:</strong> Dynamically morphs the filter cutoff
+                        frequency over the duration of every note, mapping out the initial plucky transient strike down
+                        to its gradual acoustic tail.</li>
+                    <li><strong style="color: #fff;">The LFO (Low-Frequency Oscillator):</strong> Injects steady,
+                        cycling micro-modulations below the audible range (typically 1Hz to 15Hz) to add natural analog
+                        drift and chorus-like width.</li>
+                </ul>
+                <p>
+                    Dialing up the filter filter resonance feeds the signal right back into itself at the cutoff
+                    frequency point. This introduces a sharp, biting peak that can slice clean through dense
+                    arrangements, mimicking the classic screaming synth leads found on tracks like *Da Funk*.
+                </p>
+            </section>
+        </div>
+
+        <section class="panel-style" style="margin-top: 30px;">
+            <div class="card-header">
+                <h2>Vintage Hardware Processing Specifications</h2>
+                <span style="color: var(--neon-yellow, #ffee00);">LOG: CORE_GEAR</span>
+            </div>
+            <p>
+                A breakdown of historical reference units used to isolate vintage characteristics within modern tracking
+                frameworks:
+            </p>
+
+            <table class="gear-spec-table">
+                <thead>
+                    <tr>
+                        <th>Machine Profile</th>
+                        <th>Target Architecture</th>
+                        <th>Sonic Characteristics</th>
+                        <th>Classic Production Role</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td><strong>Ensoniq ASR-10</strong></td>
+                        <td>16-Bit Linear Sampling</td>
+                        <td>Incredibly warm internal input transformers with thick, dark digital filters.</td>
+                        <td>Main loop chop processing and effects phasing arrays.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>E-mu SP-1200</strong></td>
+                        <td>12-Bit / 26.04kHz Gritty Engine</td>
+                        <td>Ring-modulation artifacts on pitched-down inputs; aggressive mid-range focus.</td>
+                        <td>Raw, crunchy drum sequencing and industrial groove weight.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Roland TR-909</strong></td>
+                        <td>Analog + Digital Hybrid Accent</td>
+                        <td>Punchy analog kick and snare circuits paired with gritty, low-bit sampled hi-hats.</td>
+                        <td>The foundation for driving, syncopated 4/4 underground rhythm tracking.</td>
+                    </tr>
+                    <tr>
+                        <td><strong>Alesis 3630</strong></td>
+                        <td>Dual VCA RMS Integrated Chip</td>
+                        <td>Gritty, aggressive gain reduction that clamps down quickly when driven hard.</td>
+                        <td>Extreme master-bus pumping sidechain compression.</td>
+                    </tr>
+                </tbody>
+            </table>
         </section>
     </main>
 
