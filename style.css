@@ -264,6 +264,7 @@ nav {
     padding: 80px 5% 40px;
     max-width: 1300px;
     margin: 0 auto;
+    text-wrap: wrap;
 }
 
 .hero-grid {
@@ -282,6 +283,7 @@ h1 {
     text-transform: uppercase;
     margin-bottom: 25px;
     text-shadow: 3px 3px 0px var(--neon-pink);
+    text-wrap: wrap;
 }
 
 .hero-tagline {
