@@ -33,11 +33,12 @@ body {
     color: var(--silver-metallic);
     font-family: var(--font-mono);
     min-height: 100vh;
-    overflow-x: auto;
+    overflow-x: hidden;
     position: relative;
     padding-bottom: 80px;
-    display: flex;
-    flex-direction: row;
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 20px;
 }
 
 /* ==========================================================================
