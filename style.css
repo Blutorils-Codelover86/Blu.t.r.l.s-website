@@ -37,7 +37,8 @@ body {
     position: relative;
     padding-bottom: 80px;
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    gap: 20px;
 }
 
 /* ==========================================================================
