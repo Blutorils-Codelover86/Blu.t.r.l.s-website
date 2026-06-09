@@ -33,8 +33,7 @@ body {
     color: var(--silver-metallic);
     font-family: var(--font-mono);
     min-height: 100vh;
-    min-width: 100vw;
-    overflow-x: hidden;
+    overflow-x: auto;
     position: relative;
     padding-bottom: 80px;
     display: flex;
