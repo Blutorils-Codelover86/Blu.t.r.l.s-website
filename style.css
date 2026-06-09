@@ -36,9 +36,6 @@ body {
     overflow-x: hidden;
     position: relative;
     padding-bottom: 80px;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
 }
 
 /* ==========================================================================
