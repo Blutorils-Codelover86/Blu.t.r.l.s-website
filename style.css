@@ -54,6 +54,9 @@ body::before {
     z-index: 10000;
     background-size: 100% 4px, 6px 100%;
     pointer-events: none;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
 }
 
 /* ==========================================================================
