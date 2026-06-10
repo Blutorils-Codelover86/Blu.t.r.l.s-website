@@ -224,6 +224,7 @@ header {
 nav {
     display: flex;
     gap: 10px;
+    flex-wrap: wrap;
 }
 
 .nav-link {
